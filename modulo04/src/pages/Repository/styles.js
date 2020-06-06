@@ -69,6 +69,8 @@ export const IssueList = styled.ul`
     div {
       flex: 1;
       margin-left: 15px;
+      width: 100%;
+      padding: 8px 0;
 
       strong {
         font-size: 16px;
