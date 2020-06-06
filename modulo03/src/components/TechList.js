@@ -9,13 +9,39 @@ class TechList extends Component {
 
   state = {
     newTech: '',
-    techs: [
-      'NodeJS',
-      'ReactJS',
-      'React Native',
-      'Flutter'
-    ]
+    techs: []
   };
+
+  /**
+   * Cliclo de vida dos componentes
+   * 
+   * Executado assim que o componente aparece em tela
+   * componentDidMount()
+   * 
+   * Executado assim que houver alteração no state ou props
+   * - prevPros & prevState: estado e prop anteriores p/ comparação
+   * componentDidUpdate(prevProps,prevState)
+   * 
+   * Executado quando o componente deixa de existir
+   * - ideal para remover eventos relacionados ao componente
+   *   quando ele ainda existia
+   * componentWillUnmount()
+   * 
+   */
+
+   componentDidMount(){
+     const techs = localStorage.getItem('techs');
+
+     if(techs){
+        this.setState({ techs: JSON.parse(techs)});
+     }
+   }
+
+   componentDidUpdate(_,prevState){
+     if(prevState.techs !== this.state.techs){
+       localStorage.setItem('techs', JSON.stringify(this.state.techs));
+     }
+   }
 
   /* arrow => functions tem acesso ao this diferente de function() */
   handleInputChange = e => {
