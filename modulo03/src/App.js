@@ -6,7 +6,7 @@ import TechList from './components/TechList';
 
 function App(){
   return <> 
-            <h1>Hello Worlds</h1>
+            <h1>Hello React World</h1>
             <TechList />
         </>;
 }

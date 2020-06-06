@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
+import TechItem from './TechItem';
+
 class TechList extends Component {
+  static defaultProps = {
+    default: 'Prop padrão',
+  };
+
   state = {
     newTech: '',
     techs: [
@@ -31,24 +37,31 @@ class TechList extends Component {
   }
 
   render() {
-    return (
-        <form onSubmit={this.handleSubmit}>
-          <ul>
-            {
-              this.state.techs.map( (tech,index) => (
-              <li key={index}> {tech} - <i onClick={() => this.handleDelete(index)}>Remover</i> </li>
-              ))
-            }
-          </ul>
-          <input 
-            type="text" 
-            onChange={this.handleInputChange}
-            value={this.state.newTech}
-          />
-          <button type="submit">Salvar</button>
-        </form>
-    );
-  }
+      return (
+          <form onSubmit={this.handleSubmit}>
+            <h5>{this.props.default}</h5>
+            <ul>
+              {
+                this.state.techs.map( (tech,index) => (
+                    <TechItem 
+                      key={index} 
+                      tech={tech} 
+                      index={index} 
+                      onDelete={() => this.handleDelete(index)} 
+                    />
+                  ) 
+                )
+              }
+            </ul>
+            <input 
+              type="text" 
+              onChange={this.handleInputChange}
+              value={this.state.newTech}
+            />
+            <button type="submit">Salvar</button>
+          </form>
+      );
+    }
 }
 
 export default TechList;
