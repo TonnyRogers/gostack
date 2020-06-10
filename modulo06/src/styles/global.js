@@ -24,7 +24,7 @@ export default createGlobalStyle`
 
   body,input,button {
     font: 14px Roboto,sans-serif;
-    color: #fff;
+
   }
 
   #root {
