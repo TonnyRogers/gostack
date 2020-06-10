@@ -5,6 +5,10 @@ import background from '../assets/images/background.svg';
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700;900&display=swap');
 
+  :root{
+    --primary-color: #7169c1;
+  }
+
   * {
     margin: 0;
     padding: 0;
