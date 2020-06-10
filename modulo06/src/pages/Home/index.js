@@ -1,106 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { MdShoppingCart } from 'react-icons/md';
 
+import { formatPrice } from '../../util/format';
+import api from '../../services/api';
 import { ProductList } from './styles';
 
-export default function Home() {
-  return (
-    <ProductList>
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-de-caminhada-leve-confortavel/06/E74-0492-006/E74-0492-006_zoom2.jpg?ts=1586961574&ims=326x"
-          alt="Tênis"
-        />
-        <strong>Tênis Nike</strong>
-        <span>R$129,90</span>
+export default class Home extends Component {
+  state = {
+    products: [],
+  };
 
-        <button type="button">
-          <div>
-            <MdShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>Adicionar ao Carrinho</span>
-        </button>
-      </li>
+  async componentDidMount() {
+    const response = await api.get('/products');
 
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-de-caminhada-leve-confortavel/06/E74-0492-006/E74-0492-006_zoom2.jpg?ts=1586961574&ims=326x"
-          alt="Tênis"
-        />
-        <strong>Tênis Nike</strong>
-        <span>R$129,90</span>
+    const data = response.data.map((product) => ({
+      ...product,
+      priceFormatted: formatPrice(product.price),
+    }));
 
-        <button type="button">
-          <div>
-            <MdShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>Adicionar ao Carrinho</span>
-        </button>
-      </li>
+    this.setState({ products: data });
+  }
 
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-de-caminhada-leve-confortavel/06/E74-0492-006/E74-0492-006_zoom2.jpg?ts=1586961574&ims=326x"
-          alt="Tênis"
-        />
-        <strong>Tênis Nike</strong>
-        <span>R$129,90</span>
+  render() {
+    const { products } = this.state;
 
-        <button type="button">
-          <div>
-            <MdShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>Adicionar ao Carrinho</span>
-        </button>
-      </li>
+    return (
+      <ProductList>
+        {products.map((product) => (
+          <li key={product.id}>
+            <img src={product.image} alt={`Imagem de ${product.title}`} />
+            <strong>{product.title}</strong>
+            <span>{product.priceFormatted}</span>
 
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-de-caminhada-leve-confortavel/06/E74-0492-006/E74-0492-006_zoom2.jpg?ts=1586961574&ims=326x"
-          alt="Tênis"
-        />
-        <strong>Tênis Nike</strong>
-        <span>R$129,90</span>
-
-        <button type="button">
-          <div>
-            <MdShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>Adicionar ao Carrinho</span>
-        </button>
-      </li>
-
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-de-caminhada-leve-confortavel/06/E74-0492-006/E74-0492-006_zoom2.jpg?ts=1586961574&ims=326x"
-          alt="Tênis"
-        />
-        <strong>Tênis Nike</strong>
-        <span>R$129,90</span>
-
-        <button type="button">
-          <div>
-            <MdShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>Adicionar ao Carrinho</span>
-        </button>
-      </li>
-
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-de-caminhada-leve-confortavel/06/E74-0492-006/E74-0492-006_zoom2.jpg?ts=1586961574&ims=326x"
-          alt="Tênis"
-        />
-        <strong>Tênis Nike</strong>
-        <span>R$129,90</span>
-
-        <button type="button">
-          <div>
-            <MdShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>Adicionar ao Carrinho</span>
-        </button>
-      </li>
-    </ProductList>
-  );
+            <button type="button">
+              <div>
+                <MdShoppingCart size={16} color="#fff" /> 3
+              </div>
+              <span>Adicionar ao Carrinho</span>
+            </button>
+          </li>
+        ))}
+      </ProductList>
+    );
+  }
 }
