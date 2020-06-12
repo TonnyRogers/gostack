@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
   const [techs, setTech] = useState(['NodeJS', 'ReactJs']);
@@ -12,6 +12,18 @@ function App() {
   function handleChange(e) {
     setNewTech(e.target.value);
   }
+
+  useEffect(() => {
+    const localTechs = localStorage.getItem('techs');
+
+    if (localTechs) {
+      setTech(JSON.parse(localTechs));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('techs', JSON.stringify(techs));
+  }, [techs]);
 
   return (
     <>
