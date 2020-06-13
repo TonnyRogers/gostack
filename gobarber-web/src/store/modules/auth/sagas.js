@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-return */
 import { all, takeLatest, call, put } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import api from '~/services/api';
 
 import { signInSuccess, signFailure } from './actions';
@@ -14,7 +15,8 @@ export function* signIn({ payload }) {
     const { token, user } = response.data;
 
     if (!user.provider) {
-      console.tron.error('Usuário não é prestador.');
+      toast.warning('Usuário não é um prestador.');
+      yield put(signFailure());
       return;
     }
 
@@ -22,6 +24,7 @@ export function* signIn({ payload }) {
 
     history.push('/dashboard');
   } catch (error) {
+    toast.error('Erro na autenticação, verifique os dados.');
     yield put(signFailure());
   }
 }
