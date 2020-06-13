@@ -5,7 +5,6 @@ import './config/ReactotronConfig';
 import GlobalStyle from './styles/global';
 
 import Routes from './routes';
-import history from './services/history';
 
 function App() {
   return (
