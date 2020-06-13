@@ -6,7 +6,7 @@ import { Router } from 'react-router-dom';
 
 import './config/ReactotronConfig';
 
-import Routes from './routes/index';
+import Routes from './routes';
 import history from './services/history';
 
 import { store, persistor } from './store';
