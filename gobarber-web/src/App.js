@@ -10,8 +10,8 @@ import history from './services/history';
 function App() {
   return (
     <Router history={history}>
-      <GlobalStyle />
       <Routes />
+      <GlobalStyle />
     </Router>
   );
 }
