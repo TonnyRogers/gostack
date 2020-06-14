@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  max-width: 600px;
-  margin: auto;
+  align-self: stretch;
+  width: 600px;
+  margin: 0 auto;
 
   form {
     display: flex;
