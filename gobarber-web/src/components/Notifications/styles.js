@@ -36,6 +36,7 @@ export const NotificationList = styled.div`
   border-radius: 4px;
   padding: 15px 5px;
   transition: all 0.3s;
+  z-index: 5;
 
   ${(props) =>
     !props.visible &&
