@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import { Container } from './styles';
 import { updateProfileRequest } from '~/store/modules/user/actions';
+import AvatarInput from './AvatarInput';
 
 export default function Profile() {
   const profile = useSelector((state) => state.user.profile);
@@ -15,15 +16,10 @@ export default function Profile() {
     dispatch(updateProfileRequest(data));
   }
 
-  // const schema = Yup.object().shape({
-  //   name: Yup.string().required('Campo obrigatório'),
-  //   email: Yup.string().email('Email inválido').required('Campo obrigatório'),
-  //   password: Yup.string().min(6, 'A senha deve conter ao menos 6 caracteres'),
-  // });
-
   return (
     <Container>
       <Form initialData={profile} onSubmit={handleData}>
+        <AvatarInput name="avatar_id" />
         <Input name="name" placeholder="Nome completo" />
         <Input name="email" type="email" placeholder="Seu email" />
         <hr />

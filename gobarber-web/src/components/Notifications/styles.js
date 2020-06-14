@@ -38,15 +38,10 @@ export const NotificationList = styled.div`
   transition: all 0.3s;
 
   ${(props) =>
-    props.visible
-      ? css`
-          opacity: 1;
-          visibility: initial;
-        `
-      : css`
-          opacity: 0;
-          visibility: hidden;
-        `}
+    !props.visible &&
+    css`
+      display: none;
+    `}
 
   &::before {
     content: '';
