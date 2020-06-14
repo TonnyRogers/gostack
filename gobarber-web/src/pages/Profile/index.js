@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
-import * as Yup from 'yup';
 
 import { Container } from './styles';
 import { updateProfileRequest } from '~/store/modules/user/actions';
