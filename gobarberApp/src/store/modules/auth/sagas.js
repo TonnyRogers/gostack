@@ -26,6 +26,8 @@ export function* signIn({ payload }) {
 
     yield delay(3000);
 
+    Alert.alert('Sucesso!', 'Deu certo');
+
     yield put(signInSuccess(token, user));
 
     // history.push('/dashboard');
