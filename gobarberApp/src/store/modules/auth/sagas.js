@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-return */
 import { Alert } from 'react-native';
-import { all, takeLatest, call, put } from 'redux-saga/effects';
+import { all, takeLatest, call, put, delay } from 'redux-saga/effects';
 import api from '../../../services/api';
 
 import { signInSuccess, signFailure } from './actions';
@@ -24,11 +24,16 @@ export function* signIn({ payload }) {
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
+    yield delay(3000);
+
     yield put(signInSuccess(token, user));
 
     // history.push('/dashboard');
   } catch (error) {
+    yield delay(3000);
+
     Alert.alert('Erro de autenticação', 'Verifique os dados e tente novamente');
+
     yield put(signFailure());
   }
 }
@@ -41,7 +46,6 @@ export function* signUp({ payload }) {
       email,
       password,
       name,
-      provider: true,
     });
 
     // history.push('/');
