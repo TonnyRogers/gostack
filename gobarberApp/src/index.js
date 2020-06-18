@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { StatusBar } from 'react-native';
@@ -12,8 +13,10 @@ export default function Index() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <StatusBar backgroundColor="#7159c1" barStyle="light-content" />
-        <App />
+        <NavigationContainer>
+          <StatusBar backgroundColor="#7159c1" barStyle="light-content" />
+          <App />
+        </NavigationContainer>
       </PersistGate>
     </Provider>
   );
