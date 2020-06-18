@@ -1,8 +1,28 @@
 import React from 'react';
-import { Text } from 'react-native';
 
-// import { Container } from './styles';
+import { Container, Title, List } from './styles';
+
+import Background from '../../components/Background';
+import Appointment from '../../components/Appointment';
+
+const data = [1, 2, 3, 4, 5, 6, 7];
 
 export default function Dashboard() {
-  return <Text>Dash Bord</Text>;
+  return (
+    <Background>
+      <Container>
+        <Title>Agendamentos</Title>
+
+        <List
+          data={data}
+          keyExtractor={(item) => String(item)}
+          renderItem={({ item }) => <Appointment data={item} />}
+        />
+      </Container>
+    </Background>
+  );
 }
+
+Dashboard.navigationOptions = {
+  tabBarLabel: 'Agendamentos',
+};
