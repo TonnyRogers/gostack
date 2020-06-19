@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { updateProfileRequest } from '../../store/modules/user/actions';
 import { signOut } from '../../store/modules/auth/actions';
@@ -16,8 +18,14 @@ import {
 import Background from '../../components/Background';
 
 export default function Profile() {
+  const navigation = useNavigation();
   const profile = useSelector((state) => state.user.profile);
   const dispatch = useDispatch();
+
+  navigation.setOptions({
+    title: 'Meu Perfil',
+    tabBarIcon: ({ color }) => <Icon name="person" size={20} color={color} />,
+  });
 
   const [name, setName] = useState(profile.name);
   const [email, setEmail] = useState(profile.email);

@@ -43,8 +43,6 @@ const Confirm = ({ route }) => {
     });
 
     navigation.navigate('Dashboard');
-
-    // navigation.navigate('Dashborad');
   }
 
   return (

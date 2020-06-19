@@ -30,16 +30,7 @@ export default (isSigned = false) =>
         backgroundColor: '#8d41a8',
       }}
     >
-      <MaterialTab.Screen
-        name="Dashboard"
-        component={Dashboard}
-        options={{
-          title: 'Agendamentos',
-          tabBarIcon: ({ color }) => (
-            <Icon name="event" size={20} color={color} />
-          ),
-        }}
-      />
+      <MaterialTab.Screen name="Dashboard" component={Dashboard} />
       <MaterialTab.Screen
         name="New"
         children={({ navigation }) => (
@@ -68,16 +59,7 @@ export default (isSigned = false) =>
           ),
         }}
       />
-      <MaterialTab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          title: 'Meu Perfil',
-          tabBarIcon: ({ color }) => (
-            <Icon name="person" size={20} color={color} />
-          ),
-        }}
-      />
+      <MaterialTab.Screen name="Profile" component={Profile} />
     </MaterialTab.Navigator>
   ) : (
     <Tab.Navigator initialRouteName="SignIn">
