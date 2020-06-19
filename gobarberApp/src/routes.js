@@ -55,16 +55,8 @@ export default (isSigned = false) =>
               headerStyle: {},
             }}
           >
-            <Stack.Screen
-              component={SelectDatetime}
-              name="SelectDatetime"
-              options={{ title: 'Selecione o horário' }}
-            />
-            <Stack.Screen
-              component={SelectProvider}
-              name="SelectProvider"
-              options={{ title: 'Selecione o Prestador' }}
-            />
+            <Stack.Screen component={SelectDatetime} name="SelectDatetime" />
+            <Stack.Screen component={SelectProvider} name="SelectProvider" />
             <Stack.Screen component={Confirm} name="Confirm" />
           </Stack.Navigator>
         )}

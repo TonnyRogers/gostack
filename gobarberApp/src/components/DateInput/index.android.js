@@ -1,9 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { DatePickerAndroid } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import { Container, DateButton, DateText } from './styles';
 
 const DateInput = ({ date, onChange }) => {
@@ -15,6 +17,7 @@ const DateInput = ({ date, onChange }) => {
   async function handleOpenPicker() {
     const { action, year, month, day } = await DatePickerAndroid.open({
       mode: 'spinner',
+      minDate: new Date(),
       date,
     });
 

@@ -10,6 +10,10 @@ const SelectProvider = () => {
   const [providers, setProviders] = useState([]);
   const navigation = useNavigation();
 
+  navigation.setOptions({
+    title: 'Selecione o Prestador',
+  });
+
   useEffect(() => {
     async function loadProviders() {
       const response = await api.get('providers');
