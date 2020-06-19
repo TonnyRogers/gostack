@@ -42,14 +42,15 @@ export default (isSigned = false) =>
       />
       <MaterialTab.Screen
         name="New"
-        children={() => (
+        children={({ navigation }) => (
           <Stack.Navigator
+            navigation
             initialRouteName="SelectProvider"
             screenOptions={{
               headerTintColor: '#FFF',
               headerTransparent: true,
               headerLeftContainerStyle: {
-                marginLeft: 5,
+                marginLeft: 15,
               },
               headerTitleAlign: 'center',
               headerStyle: {},

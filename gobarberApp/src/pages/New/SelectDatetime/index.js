@@ -14,13 +14,20 @@ export default function SelectDatetime({ route }) {
 
   navigation.setOptions({
     title: 'Selecione o horário',
+    headerLeft: () => (
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}
+      >
+        <Icon name="chevron-left" size={35} color="#FFF" />
+      </TouchableOpacity>
+    ),
   });
 
   const [date, setDate] = useState(new Date());
   const [hours, setHours] = useState([]);
   const { provider } = route.params;
-
-  console.tron.log(provider);
 
   useEffect(() => {
     async function loadAvailable() {
