@@ -1,11 +1,25 @@
 import request from 'supertest';
+import bcrypt from 'bcryptjs';
 import app from '../../src/app';
 
 import truncate from '../util/truncate';
+import User from '../../src/app/models/User';
 
 describe('User', () => {
   beforeEach(async () => {
     await truncate();
+  });
+
+  it('should encrypt password when new user created', async () => {
+    const user = await User.create({
+      name: 'Antoniel',
+      email: 'antoniel15975@gmail.com',
+      password: '112233',
+    });
+
+    const compareHash = await bcrypt.compare('112233', user.password_hash);
+
+    expect(compareHash).toBe(true);
   });
 
   it('should be able to register', async () => {
