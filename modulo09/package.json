@@ -17,9 +17,8 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "bail": 1,
     "testMatch": [
-      "**/__tests__/**/*.test.js"
+      "src/__tests__/**/*.test.js"
     ],
     "moduleNameMapper": {
       "^~/(.*)": "<rootDir>/src/$1"
@@ -45,6 +44,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.0",
-    "react-app-rewired": "^2.1.6"
+    "react-app-rewired": "^2.1.6",
+    "react-test-renderer": "^16.13.1"
   }
 }
