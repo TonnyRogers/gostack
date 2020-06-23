@@ -42,7 +42,7 @@ describe('TechList component', () => {
   //  });
 
   // REDUX TESTS
-
+  
   it('should render tech list',() => {
     useSelector.mockImplementation(cb => cb({
       techs: ['Node.js','ReactJS']
@@ -55,16 +55,17 @@ describe('TechList component', () => {
   });
 
   it('should be able to add new tech', () => {
-    const { getByTestId, getByLabelText } = render(<TechList />);
-
+    
     const dispatch = jest.fn();
-
+    
     useDispatch.mockReturnValue(dispatch);
+    
+    const { getByTestId, getByLabelText } = render(<TechList />);
 
     fireEvent.change(getByLabelText('Tech'), { target: { value: 'Node.js' } });
     fireEvent.submit(getByTestId('tech-form'));
 
-    console.log(dispatch.mock.calls);
+    // console.log(dispatch.mock.calls);
 
     expect(dispatch).toHaveBeenCalledWith(addTech('Node.js'))
 
