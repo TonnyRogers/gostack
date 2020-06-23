@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 
 export default function TechList() {
   const [techs,setTechs] = useState([]);
+  const [newtech,setNewTech] = useState('');
 
   function handleAddTech() {
-    setTechs([...techs,'Node.js']);
+    setTechs([...techs,newtech]);
+    setNewTech('');
   }
 
   return (
@@ -14,7 +16,11 @@ export default function TechList() {
       <ul data-testid="tech-list">{
         techs.map( tech => ( <li key={tech}>{tech}</li> ))
       }</ul>
-      <button onClick={handleAddTech}>Adicionar</button>
+      <form onSubmit={handleAddTech} data-testid="tech-form">
+        <label htmlFor="tech">Tech</label>
+        <input type="text" id="tech" value={newtech} onChange={e => setNewTech(e.target.value)}/>
+        <button type="submit">Adicionar</button>
+      </form>
     </div>
   );
 }
