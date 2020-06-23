@@ -1,7 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { render, fireEvent, cleanup } from '@testing-library/react';
 
+import { addTech } from '../../store/modules/techs/actions';
 import TechList from '../../components/TechList';
 
 // To Jest interpolate redux functions as his
@@ -12,7 +13,7 @@ describe('TechList component', () => {
 
   // beforeEach( () => {
   //   localStorage.clear();
-  // } )
+  // } );
 
   // it('should be able to add new tech', () => {
   //   const { getByText,getByTestId, getByLabelText } = render(<TechList />);
@@ -22,7 +23,7 @@ describe('TechList component', () => {
 
   //   expect(getByTestId('tech-list')).toContainElement(getByText('Node.js'));
   //   expect(getByLabelText('Tech')).toHaveValue('');
-  // })
+  // });
 
   // it('should store in storage', () => {
   //   let { getByText ,getByTestId, getByLabelText } = render(<TechList />);
@@ -38,7 +39,7 @@ describe('TechList component', () => {
   //   expect(localStorage.setItem).toHaveBeenCalledWith('techs',JSON.stringify(['Node.js']));
   //   expect(getByTestId('tech-list')).toContainElement(getByText('Node.js'));
 
-  //  })
+  //  });
 
   // REDUX TESTS
 
@@ -51,7 +52,22 @@ describe('TechList component', () => {
 
     expect(getByTestId('tech-list')).toContainElement(getByText('Node.js'));
     expect(getByTestId('tech-list')).toContainElement(getByText('ReactJS'));
+  });
 
+  it('should be able to add new tech', () => {
+    const { getByTestId, getByLabelText } = render(<TechList />);
 
-  })
+    const dispatch = jest.fn();
+
+    useDispatch.mockReturnValue(dispatch);
+
+    fireEvent.change(getByLabelText('Tech'), { target: { value: 'Node.js' } });
+    fireEvent.submit(getByTestId('tech-form'));
+
+    console.log(dispatch.mock.calls);
+
+    expect(dispatch).toHaveBeenCalledWith(addTech('Node.js'))
+
+  });
+
 });
