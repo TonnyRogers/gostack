@@ -58,7 +58,6 @@ class AppointmentController {
 
       return res.json(appointment);
     } catch (error) {
-      console.log(error); /* eslint no-console: "off" */
       return res.status(500).json({ error: 'Server error' });
     }
   }
