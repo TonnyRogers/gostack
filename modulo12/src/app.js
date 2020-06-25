@@ -4,6 +4,9 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import helmet from 'helmet';
+import redis from 'redis';
+import RateLimit from 'express-rate-limit';
+import RateLimitRedis from 'rate-limit-redis';
 import Youch from 'youch';
 import * as Sentry from '@sentry/node';
 import 'express-async-errors';
@@ -31,11 +34,28 @@ class App {
       '/files',
       express.static(path.resolve(__dirname, '..', 'temp', 'uploads'))
     );
+
+    if (process.env.NODE_ENV !== 'development') {
+      this.server.use(
+        new RateLimit({
+          store: new RateLimitRedis({
+            client: redis.createClient({
+              port: process.env.REDIS_PORT,
+              host: process.env.REDIS_HOST,
+            }),
+          }),
+          windowMs: 1000 * 60 * 15,
+          max: 100,
+        })
+      );
+    }
   }
 
   routes() {
     this.server.use(routes);
-    this.server.use(Sentry.Handlers.errorHandler());
+    if (process.env.NODE_ENV !== 'development') {
+      this.server.use(Sentry.Handlers.errorHandler());
+    }
   }
 
   exceptionHandler() {
