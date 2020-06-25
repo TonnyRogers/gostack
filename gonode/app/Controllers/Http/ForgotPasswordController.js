@@ -1,5 +1,6 @@
 'use strict'
 
+const moment = require('moment')
 const crypto = require('crypto')
 const User = use('App/Models/User')
 const Mail = use('Mail')
@@ -26,6 +27,32 @@ class ForgotPasswordController {
         })
     } catch (error) {
       return response.status(error.status).send({ error: 'Something going wrong, this is a valid email?' })
+    }
+  }
+
+  async update ({ request, response }) {
+    try {
+      const { token, password } = request.all()
+
+      const user = await User.findByOrFail('token', token)
+
+      const tokenExpired = moment()
+        .subtract('2', 'days')
+        .isAfter(user.token_created_at)
+
+      if (tokenExpired) {
+        return response.status(401)
+          .send({ error: 'Token Expired' })
+      }
+
+      user.token = null
+      user.token_created_at = null
+      user.password = password
+
+      await user.save()
+    } catch (error) {
+      return response.status(error.status)
+        .send({ error: 'Something going wrong' })
     }
   }
 }
