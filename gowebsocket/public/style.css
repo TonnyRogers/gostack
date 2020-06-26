@@ -15,6 +15,9 @@ body {
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  outline: none;
 }
 
 section {
@@ -75,6 +78,120 @@ a {
 
 p {
   margin: 0.83rem 0;
+}
+
+.ws-open {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(64, 236, 121);
+}
+
+.ws-error {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(236, 75, 64);
+}
+
+.ws-close {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(236, 161, 64);
+}
+
+.ws-initial {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: skyblue;
+}
+
+.container {
+  height: auto;
+  padding: 18px;
+  background: #fff;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.container .chat {
+  border: 1px solid #eee;
+  padding: 16px;
+  background: #f9f9f9;
+  border-radius: 4px;
+  height: 100%;
+}
+
+.container .chat .chat-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.container .chat .chat-body{
+  display: flex;
+  flex-direction: column;
+}
+
+.container .chat .chat-body .chat-messages {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.container .chat .chat-body  .chat-messages div.current {
+  background: #e9dcfa;
+  margin: 12px 6px;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.container .chat .chat-body  .chat-messages div.current p {
+  text-align: end;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.container .chat .chat-body .chat-messages div.recived {
+  background: rgb(154, 250, 186);
+  margin: 12px 6px;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.container .chat .chat-body  .chat-messages div.recived p {
+  text-align: start;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.container .chat .chat-body .chat-messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.container .chat .chat-body textarea {
+  height: 100px;
+  margin-top: 16px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+
+}
+
+.container .chat .chat-body button {
+  align-self: stretch;
+  height: 44px;
+  margin-top: 16px;
+  border-radius: 4px;
+  background: skyblue;
+  font-weight: bold;
+  font-size: 18px;
+  color: #fff;
 }
 
 @keyframes slideUp {

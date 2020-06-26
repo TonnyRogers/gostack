@@ -7,14 +7,85 @@
 </head>
 <body>
   <section>
-    <div class="logo"></div>
-    <div class="title"></div>
     <div class="subtitle">
-      <p>AdonisJs simplicity will make you feel confident about your code</p>
-      <p>
-        Don't know where to start? Read the <a href="https://adonisjs.com/docs">documentation</a>.
-      </p>
+      Web Socket
+    </div>
+
+    <div class="container" >
+      <div class="chat">
+        <div class="chat-header">
+          <div id="status" class="ws-initial"></div> Server Status
+        </div>
+        <div class="chat-body">
+          <div class="chat-messages">
+          </div>
+          <textarea ></textarea>
+          <button>Enviar</button>
+        </div>
+      </div>
+
     </div>
   </section>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
+<script src="https://unpkg.com/@adonisjs/websocket-client@1.0.9/dist/Ws.browser.js"></script>
+<script>
+  const ws = adonis.Ws('ws://localhost:3333').connect()
+
+  const statusDiv = document.querySelector('div#status');
+
+  ws.on('open', () => {
+    statusDiv.classList.remove(...statusDiv.classList);
+    statusDiv.classList.add('ws-open');
+  })
+
+  ws.on('error', () => {
+    statusDiv.classList.remove(...statusDiv.classList);
+    statusDiv.classList.add('ws-error');
+  })
+
+  ws.on('close', () => {
+    statusDiv.classList.remove(...statusDiv.classList);
+    statusDiv.classList.add('ws-close');
+  })
+
+  const url = new URLSearchParams(window.location.search)
+  const userName = url.get('name')
+
+  const chat = ws.subscribe('chat')
+
+  const textarea = document.querySelector('textarea')
+
+  const chatBox = document.querySelector('div.chat-messages')
+
+  textarea.addEventListener('keydown', (e) => {
+    if(e.code === "Enter" || e.code === "NumpadEnter") {
+      e.preventDefault()
+
+      chat.emit('message',{ text: textarea.value, userName })
+
+      textarea.value = "";
+    }
+  })
+
+  chat.on('message', (data) => {
+    const div = document.createElement('div')
+    const text = document.createElement('p')
+
+    div.classList.add('recived')
+
+    if(data.userName === userName){
+      div.classList.remove(...div.classList)
+      div.classList.add('current')
+    }
+
+    text.innerHTML = data.text;
+    div.appendChild(text)
+
+    chatBox.appendChild(div)
+
+    chatBox.scrollTop = chatBox.scrollHeight
+  })
+
+</script>
 </html>
