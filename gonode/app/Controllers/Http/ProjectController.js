@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 'use strict'
 
@@ -9,7 +10,6 @@ const { resource } = require('@adonisjs/framework/src/Route/Manager')
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Project = use('App/Models/Project')
-const User = use('App/Models/User')
 
 /**
  * Resourceful controller for interacting with projects

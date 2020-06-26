@@ -53,6 +53,7 @@ class TaskController {
 
       return task
     } catch (error) {
+      console.log(error)
       return response.status(error.status).json({ error: { message: 'Error to create task' } })
     }
   }
