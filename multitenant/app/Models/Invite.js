@@ -3,7 +3,13 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
-class Invate extends Model {
+class Invite extends Model {
+  static boot () {
+    super.boot()
+
+    this.addHook('afterCreate', 'InviteHook.sendInvitationEmail')
+  }
+
   user () {
     return this.belongsTo('App/Models/User')
   }
@@ -13,4 +19,4 @@ class Invate extends Model {
   }
 }
 
-module.exports = Invate
+module.exports = Invite
