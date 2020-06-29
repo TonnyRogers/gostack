@@ -1,5 +1,7 @@
 'use strict'
 
+const { route } = require('@adonisjs/framework/src/Route/Manager')
+
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
@@ -50,4 +52,6 @@ Route.group(() => {
 
   Route.get('members', 'MemberController.index')
   Route.put('members/:id', 'MemberController.update').middleware('is:admin')
+
+  Route.get('permissions', 'PermissionController.show')
 }).middleware(['auth', 'team'])
