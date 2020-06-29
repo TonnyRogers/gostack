@@ -40,7 +40,7 @@ export const SignForm = styled.form`
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     background: 1px solid rgba(0, 0, 0, 0.1);
-    color: #f6f6f6;
+    color: #999;
     margin-top: 8px;
     transition: border 0.15s ease;
     font-size: 16px;

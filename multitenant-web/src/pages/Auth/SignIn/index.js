@@ -1,19 +1,40 @@
-import React from 'react';
+/* eslint-disable no-console */
+import React, { useState } from 'react';
 
 import Buttom from '~/styles/components/Button';
 import { Container, SignForm } from '../styles';
 
 function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    console.log(email);
+    console.log(password);
+  }
+
   return (
     <Container>
-      <SignForm onSubmit={() => {}}>
+      <SignForm onSubmit={(e) => handleSubmit(e)}>
         <h1>Boas vindas</h1>
 
         <span>E-MAIL</span>
-        <input type="eamil" name="email" />
+        <input
+          type="eamil"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
         <span>SENHA</span>
-        <input type="password" name="password" />
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
         <Buttom size="big" type="submit">
           Entrar
