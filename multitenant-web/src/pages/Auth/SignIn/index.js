@@ -1,18 +1,22 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { signInRequest } from '~/store/modules/auth/actions';
 
 import Buttom from '~/styles/components/Button';
 import { Container, SignForm } from '../styles';
 
 function SignIn() {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(email);
-    console.log(password);
+    dispatch(signInRequest(email, password));
   }
 
   return (
