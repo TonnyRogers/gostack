@@ -48,7 +48,7 @@ class User extends Model {
 
   async is (expression) {
     const team = await this.teamJoins()
-      .where('team_is', this.currentTeam)
+      .where('team_id', this.currentTeam)
       .first()
 
     return team.is(expression)
@@ -56,7 +56,7 @@ class User extends Model {
 
   async can (expression) {
     const team = await this.teamJoins()
-      .where('team_is', this.currentTeam)
+      .where('team_id', this.currentTeam)
       .first()
 
     return team.can(expression)
@@ -64,7 +64,7 @@ class User extends Model {
 
   async scope (required) {
     const team = await this.teamJoins()
-      .where('team_is', this.currentTeam)
+      .where('team_id', this.currentTeam)
       .first()
 
     return team.scope(required)

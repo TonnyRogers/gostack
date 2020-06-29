@@ -19,7 +19,7 @@ class Team {
     }
 
     if (!team) {
-      return response.status(401).send()
+      return response.status(401).send({ error: { message: 'Team not found' } })
     }
 
     auth.user.currentTeam = team.id
