@@ -1,17 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import api from '~/services/api';
-// import { Container } from './styles';
+import TeamSwitcher from '~/components/TeamSwitcher';
+import { Container } from './styles';
 
 function Main() {
-  useEffect(() => {
-    api.post('/teste');
-  }, []);
-
   return (
-    <div>
-      <p>Main</p>
-    </div>
+    <Container>
+      <TeamSwitcher />
+    </Container>
   );
 }
 
