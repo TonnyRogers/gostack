@@ -6,7 +6,7 @@ export default (reducers) => {
     {
       key: 'multitenantapp',
       storage,
-      whitelist: ['auth'],
+      whitelist: ['auth', 'teams'],
     },
     reducers
   );
