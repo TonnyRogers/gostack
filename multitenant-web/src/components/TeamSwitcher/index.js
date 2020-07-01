@@ -1,15 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
   getTeamsRequest,
   selectTeamResquest,
+  openTeamModal,
+  closeTeamModal,
+  createTeamRequest,
 } from '~/store/modules/teams/actions';
-import { Container, TeamList, Team } from './styles';
+import { signOut } from '~/store/modules/auth/actions';
+
+import Button from '~/styles/components/Button';
+import Modal from '../Modal';
+import { Container, TeamList, Team, NewTeam, Logout } from './styles';
 
 function TeamSwitcher() {
   const dispatch = useDispatch();
-  const teams = useSelector((state) => state.teams.data);
+  const teams = useSelector((state) => state.teams);
+  const [newTeam, setNewTeam] = useState('');
 
   useEffect(() => {
     function getTeams() {
@@ -17,17 +25,22 @@ function TeamSwitcher() {
     }
 
     getTeams();
-  }, [dispatch]);
+  }, [teams, dispatch]);
 
-  function selectTeam(team) {
-    dispatch(selectTeamResquest(team));
+  function handleCreateTeam(e) {
+    e.preventDefault();
+
+    dispatch(createTeamRequest(newTeam));
   }
 
   return (
     <Container>
       <TeamList>
-        {teams.map((team) => (
-          <Team key={team.id} onClick={() => selectTeam(team)}>
+        {teams.data.map((team) => (
+          <Team
+            key={team.id}
+            onClick={() => dispatch(selectTeamResquest(team))}
+          >
             <img
               src={`https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name=${team.name}`}
               alt={team.name}
@@ -35,7 +48,36 @@ function TeamSwitcher() {
             />
           </Team>
         ))}
+
+        <NewTeam onClick={() => dispatch(openTeamModal())}>Novo</NewTeam>
+
+        {teams.teamModalOpen && (
+          <Modal>
+            <h1>Criar Time</h1>
+            <form onSubmit={(e) => handleCreateTeam(e)}>
+              <input
+                type="text"
+                name="newTeam"
+                value={newTeam}
+                onChange={(e) => setNewTeam(e.target.value)}
+              />
+              <Button type="submit" size="big">
+                Salvar
+              </Button>
+              <Button
+                type="button"
+                size="small"
+                color="gray"
+                onClick={() => dispatch(closeTeamModal())}
+              >
+                Cancelar
+              </Button>
+            </form>
+          </Modal>
+        )}
       </TeamList>
+
+      <Logout onClick={() => dispatch(signOut())}>SAIR</Logout>
     </Container>
   );
 }
