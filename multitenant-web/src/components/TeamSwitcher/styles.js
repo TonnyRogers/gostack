@@ -52,14 +52,14 @@ export const Logout = styled.button`
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  border: 1px dashed #e04848;
-  color: #e04848;
+  border: 1px dashed #a43d3d;
+  color: #a43d3d;
   font-weight: bold;
   transition: all 0.2s;
   background: transparent;
 
   &:hover {
-    border: 1px dashed #a43d3d;
-    color: #a43d3d;
+    border: 1px dashed #e04848;
+    color: #e04848;
   }
 `;

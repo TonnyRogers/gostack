@@ -20,7 +20,9 @@ function TeamSwitcher() {
   const [newTeam, setNewTeam] = useState('');
 
   // eslint-disable-next-line
-  useEffect(() => dispatch(getTeamsRequest()), [dispatch, teams.team]);
+  useEffect(() => {
+    dispatch(getTeamsRequest());
+  }, [dispatch, teams.team]);
 
   function handleCreateTeam(e) {
     e.preventDefault();
