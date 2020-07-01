@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -20,7 +20,7 @@ function TeamSwitcher() {
   const [newTeam, setNewTeam] = useState('');
 
   // eslint-disable-next-line
-  useMemo(() => dispatch(getTeamsRequest()), [dispatch, teams.team]);
+  useEffect(() => dispatch(getTeamsRequest()), [dispatch, teams.team]);
 
   function handleCreateTeam(e) {
     e.preventDefault();

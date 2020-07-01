@@ -1,12 +1,22 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { getProjectsRequest } from '~/store/modules/projects/actions';
 
 import Button from '~/styles/components/Button';
 import { Container, Project } from './styles';
 
 const Projects = () => {
   const activeTeam = useSelector((state) => state.teams.active);
+  const projects = useSelector((state) => state.projects.data);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (activeTeam) {
+      dispatch(getProjectsRequest());
+    }
+  }, [dispatch, activeTeam]);
 
   if (!activeTeam) return null;
 
@@ -24,21 +34,11 @@ const Projects = () => {
         </div>
       </header>
 
-      <Project>
-        <p>Aplicação com React</p>
-      </Project>
-
-      <Project>
-        <p>Aplicação com React</p>
-      </Project>
-
-      <Project>
-        <p>Aplicação com React</p>
-      </Project>
-
-      <Project>
-        <p>Aplicação com React</p>
-      </Project>
+      {projects.map((project) => (
+        <Project key={project.id}>
+          <p>{project.title}</p>
+        </Project>
+      ))}
     </Container>
   );
 };

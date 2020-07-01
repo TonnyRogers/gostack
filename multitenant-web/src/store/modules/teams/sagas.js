@@ -23,16 +23,6 @@ export function* getTeams() {
   }
 }
 
-export function* selectTeam({ payload }) {
-  try {
-    const { team } = payload;
-
-    yield put(selectTeamSuccess(team));
-  } catch (error) {
-    yield put(selectTeamFailure());
-  }
-}
-
 export function* setTeam({ payload }) {
   if (!payload) return;
 
@@ -40,6 +30,18 @@ export function* setTeam({ payload }) {
 
   if (team) {
     api.defaults.headers.TEAM = team.slug;
+  }
+}
+
+export function* selectTeam({ payload }) {
+  try {
+    const { team } = payload;
+
+    yield put(selectTeamSuccess(team));
+
+    api.defaults.headers.TEAM = team.slug;
+  } catch (error) {
+    yield put(selectTeamFailure());
   }
 }
 
