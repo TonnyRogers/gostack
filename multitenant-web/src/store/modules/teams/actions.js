@@ -69,3 +69,9 @@ export function createTeamFailure(team) {
     payload: { team },
   };
 }
+
+export function clearTeam() {
+  return {
+    type: '@teams/CLEAR_TEAM',
+  };
+}

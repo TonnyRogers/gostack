@@ -9,6 +9,7 @@ import {
   selectTeamSuccess,
   createTeamSuccess,
   createTeamFailure,
+  clearTeam,
 } from './actions';
 import api from '~/services/api';
 
@@ -62,9 +63,14 @@ export function* createTeam({ payload }) {
   }
 }
 
+export function* clearTeams() {
+  yield put(clearTeam());
+}
+
 export default all([
   takeLatest('persist/REHYDRATE', setTeam),
   takeLatest('@teams/GET_TEAM_REQUEST', getTeams),
   takeLatest('@teams/SELECT_TEAM_REQUEST', selectTeam),
   takeLatest('@teams/CREATE_TEAM_REQUEST', createTeam),
+  takeLatest('@auth/SIGN_OUT', clearTeams),
 ]);

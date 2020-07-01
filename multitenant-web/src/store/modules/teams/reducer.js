@@ -25,6 +25,12 @@ export default function teams(state = INITIAL_STATE, action) {
         draft.team = action.payload.team;
         draft.teamModalOpen = false;
         break;
+      case '@teams/CLEAR_TEAM':
+        draft.active = null;
+        draft.data = [];
+        draft.teamModalOpen = false;
+        draft.team = null;
+        break;
       default:
     }
   });
