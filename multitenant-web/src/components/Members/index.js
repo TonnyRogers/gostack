@@ -1,14 +1,22 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Modal';
 import { MembersList } from './styles';
 import Button from '~/styles/components/Button';
 
-import { closeMembersModal } from '~/store/modules/members/actions';
+import {
+  closeMembersModal,
+  getMembersRequest,
+} from '~/store/modules/members/actions';
 
 const Members = () => {
   const dispatch = useDispatch();
+  const members = useSelector((state) => state.members);
+
+  useEffect(() => {
+    dispatch(getMembersRequest());
+  }, [dispatch]);
 
   return (
     <Modal>
@@ -16,9 +24,13 @@ const Members = () => {
 
       <form>
         <MembersList>
-          <li>
-            <strong>Tony Amaral</strong>
-          </li>
+          {members.data ? (
+            members.data.map((member) => (
+              <li key={member.id}>{member.user.name}</li>
+            ))
+          ) : (
+            <li>Sem Membros</li>
+          )}
         </MembersList>
         <Button
           onClick={() => dispatch(closeMembersModal())}

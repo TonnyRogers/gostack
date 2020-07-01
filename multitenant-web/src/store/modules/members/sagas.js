@@ -1,8 +1,17 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import api from '~/services/api';
-// import {  } from './actions';
+import { getMembersSuccess } from './actions';
 
-export function* getall() {}
+export function* getMembers() {
+  try {
+    const response = yield call(api.get, 'members');
 
-export default all(takeLatest('@', getall));
+    yield put(getMembersSuccess(response.data));
+  } catch (error) {
+    toast.error('Erro ao carregar membros.');
+  }
+}
+
+export default all([takeLatest('@members/GET_MEMBERS_REQUEST', getMembers)]);
