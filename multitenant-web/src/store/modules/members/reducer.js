@@ -20,6 +20,19 @@ export default function members(state = INITIAL_STATE, action) {
         draft.data = action.payload.members;
         break;
       }
+      case '@members/UPDATE_MEMBERS_REQUEST': {
+        const { memberId, roles } = action.payload;
+
+        draft.data = draft.data.map((member) =>
+          member.id === memberId ? { ...member, roles } : member
+        );
+        break;
+      }
+      case '@members/CLEAR_MEMBERS': {
+        draft.membersModalOpen = false;
+        draft.data = [];
+        break;
+      }
       default:
     }
   });

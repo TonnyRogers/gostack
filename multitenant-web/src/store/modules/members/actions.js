@@ -22,3 +22,16 @@ export function getMembersSuccess(members) {
     payload: { members },
   };
 }
+
+export function updateMembersRequest(memberId, roles) {
+  return {
+    type: '@members/UPDATE_MEMBERS_REQUEST',
+    payload: { memberId, roles },
+  };
+}
+
+export function clearMembers() {
+  return {
+    type: '@members/CLEAR_MEMBERS',
+  };
+}

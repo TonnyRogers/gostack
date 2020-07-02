@@ -23,4 +23,8 @@ export const MembersList = styled.ul`
       color: #666;
     }
   }
+
+  form > button {
+    color: #7159c1;
+  }
 `;

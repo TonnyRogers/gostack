@@ -2,7 +2,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
-import { getMembersSuccess } from './actions';
+import { getMembersSuccess, clearMembers } from './actions';
 
 export function* getMembers() {
   try {
@@ -14,4 +14,26 @@ export function* getMembers() {
   }
 }
 
-export default all([takeLatest('@members/GET_MEMBERS_REQUEST', getMembers)]);
+export function* updateMember({ payload }) {
+  const { memberId, roles } = payload;
+
+  try {
+    yield call(api.put, `members/${memberId}`, {
+      roles: roles.map((role) => role.id),
+    });
+
+    toast.success('Membro atualizado!');
+  } catch (error) {
+    toast.error('Erro ao atualizar membro.');
+  }
+}
+
+export function* cleanMembers() {
+  yield put(clearMembers());
+}
+
+export default all([
+  takeLatest('@members/GET_MEMBERS_REQUEST', getMembers),
+  takeLatest('@members/UPDATE_MEMBERS_REQUEST', updateMember),
+  takeLatest('@auth/SIGN_OUT', cleanMembers),
+]);
