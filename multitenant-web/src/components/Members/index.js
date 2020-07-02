@@ -6,17 +6,19 @@ import {
   closeMembersModal,
   getMembersRequest,
   updateMembersRequest,
+  inviteMemberResquest,
 } from '~/store/modules/members/actions';
 
 import api from '~/services/api';
 import Modal from '../Modal';
-import { MembersList } from './styles';
+import { MembersList, Invite } from './styles';
 import Button from '~/styles/components/Button';
 
 const Members = () => {
   const dispatch = useDispatch();
   const members = useSelector((state) => state.members);
   const [roles, setRoles] = useState([]);
+  const [invite, setInvite] = useState('');
 
   useEffect(() => {
     dispatch(getMembersRequest());
@@ -36,9 +38,27 @@ const Members = () => {
     dispatch(updateMembersRequest(id, values));
   }
 
+  function handleInvite(e) {
+    e.preventDefault();
+
+    dispatch(inviteMemberResquest(invite));
+
+    setInvite('');
+  }
+
   return (
     <Modal size="big">
       <h1>Membros</h1>
+
+      <Invite onSubmit={(e) => handleInvite(e)}>
+        <input
+          type="text"
+          placeholder="Convidar para o time"
+          value={invite}
+          onChange={(e) => setInvite(e.target.value)}
+        />
+        <Button type="submit">Enviar</Button>
+      </Invite>
 
       <form>
         <MembersList>

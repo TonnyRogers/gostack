@@ -30,6 +30,13 @@ export function updateMembersRequest(memberId, roles) {
   };
 }
 
+export function inviteMemberResquest(email) {
+  return {
+    type: '@members/INVITE_MEMBER_REQUEST',
+    payload: { email },
+  };
+}
+
 export function clearMembers() {
   return {
     type: '@members/CLEAR_MEMBERS',

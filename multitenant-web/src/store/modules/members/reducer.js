@@ -28,6 +28,9 @@ export default function members(state = INITIAL_STATE, action) {
         );
         break;
       }
+      case '@members/INVITE_MEMBER_REQUEST': {
+        break;
+      }
       case '@members/CLEAR_MEMBERS': {
         draft.membersModalOpen = false;
         draft.data = [];

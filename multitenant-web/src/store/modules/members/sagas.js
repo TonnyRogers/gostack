@@ -2,7 +2,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
-import { getMembersSuccess, clearMembers } from './actions';
+import { getMembersSuccess, clearMembers, getMembersRequest } from './actions';
 
 export function* getMembers() {
   try {
@@ -28,6 +28,20 @@ export function* updateMember({ payload }) {
   }
 }
 
+export function* inviteMember({ payload }) {
+  try {
+    const { email } = payload;
+
+    yield call(api.post, 'invites', { invites: [email] });
+
+    toast.success('Convite enviado!');
+
+    yield put(getMembersRequest());
+  } catch (error) {
+    toast.error('Erro ao enviar convite.');
+  }
+}
+
 export function* cleanMembers() {
   yield put(clearMembers());
 }
@@ -35,5 +49,6 @@ export function* cleanMembers() {
 export default all([
   takeLatest('@members/GET_MEMBERS_REQUEST', getMembers),
   takeLatest('@members/UPDATE_MEMBERS_REQUEST', updateMember),
+  takeLatest('@members/INVITE_MEMBER_REQUEST', inviteMember),
   takeLatest('@auth/SIGN_OUT', cleanMembers),
 ]);
