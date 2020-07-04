@@ -10,6 +10,7 @@ import {
 } from '~/store/modules/projects/actions';
 import { openMembersModal } from '~/store/modules/members/actions';
 
+import Can from '~/components/Can';
 import Modal from '~/components/Modal';
 import Button from '~/styles/components/Button';
 import Members from '~/components/Members';
@@ -40,11 +41,13 @@ const Projects = () => {
   return (
     <Container>
       <header>
-        <h1>{activeTeam.name}</h1>
+        <h1> Projetos em: {activeTeam.name}</h1>
         <div>
-          <Button type="button" onClick={() => dispatch(openProjectModal())}>
-            + Novo
-          </Button>
+          <Can checkPermission="projects_create">
+            <Button type="button" onClick={() => dispatch(openProjectModal())}>
+              + Novo
+            </Button>
+          </Can>
           <Button type="button" onClick={() => dispatch(openMembersModal())}>
             Membros
           </Button>

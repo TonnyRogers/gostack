@@ -13,6 +13,26 @@ export const Container = styled.aside`
 export const TeamList = styled.div`
   display: flex;
   flex-direction: column;
+  max-height: 500px;
+  overflow-y: scroll;
+  padding: 8px;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
 `;
 
 export const Team = styled.button`
@@ -24,6 +44,7 @@ export const Team = styled.button`
     border-radius: 50%;
     width: 50px;
     height: 50px;
+    box-shadow: ${(props) => (props.current ? '0 3px 8px #59c18b' : '0')};
   }
 
   &:hover img {

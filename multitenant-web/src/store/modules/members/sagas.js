@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 

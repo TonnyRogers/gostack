@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable require-yield */
 import { all, takeLatest, put, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
@@ -28,9 +29,11 @@ export function* setTeam({ payload }) {
 
   const { active: team } = payload.teams;
 
-  if (team) {
-    api.defaults.headers.TEAM = team.slug;
-  }
+  localStorage.setItem('@Omni:team', JSON.stringify(team));
+
+  // if (team) {
+  //   api.defaults.headers.TEAM = team.slug;
+  // }
 }
 
 export function* selectTeam({ payload }) {
@@ -39,7 +42,9 @@ export function* selectTeam({ payload }) {
 
     yield put(selectTeamSuccess(team));
 
-    api.defaults.headers.TEAM = team.slug;
+    localStorage.setItem('@Omni:team', JSON.stringify(team));
+
+    // api.defaults.headers.TEAM = team.slug;
   } catch (error) {
     yield put(selectTeamFailure());
   }
@@ -70,7 +75,7 @@ export function* clearTeams() {
 }
 
 export default all([
-  takeLatest('persist/REHYDRATE', setTeam),
+  // takeLatest('persist/REHYDRATE', setTeam),
   takeLatest('@teams/GET_TEAM_REQUEST', getTeams),
   takeLatest('@teams/SELECT_TEAM_REQUEST', selectTeam),
   takeLatest('@teams/CREATE_TEAM_REQUEST', createTeam),

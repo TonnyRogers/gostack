@@ -3,7 +3,7 @@ import produce from 'immer';
 const INITIAL_STATE = {
   data: [],
   teamModalOpen: false,
-  active: null,
+  active: JSON.parse(localStorage.getItem('@Omni:team')) || null,
 };
 
 export default function teams(state = INITIAL_STATE, action) {
