@@ -37,7 +37,6 @@ const SignIn = () => {
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
-            autoFocus
             underlineColorAndroid="transparent"
             returKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
