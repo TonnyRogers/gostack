@@ -1,8 +1,9 @@
 import produce from 'immer';
 
 const INITIAL_STATE = {
-  token: /* localStorage.getItem('@Omni:token') || */ null,
-  signed: /*! !localStorage.getItem('@Omni:token') */ false,
+  authChecked: false,
+  token: null,
+  signed: false,
   loading: false,
   roles: [],
   permissions: [],

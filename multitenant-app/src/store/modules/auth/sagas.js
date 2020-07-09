@@ -1,5 +1,7 @@
 /* eslint-disable require-yield */
 import { all, takeLatest, call, put, select, fork } from 'redux-saga/effects';
+import AsyncStorage from '@react-native-community/async-storage';
+import { Alert } from 'react-native';
 
 // import history from '~/services/history';
 import api from '../../../services/api';
@@ -21,20 +23,19 @@ export function* signIn({ payload }) {
     const { token } = response.data;
 
     if (!token) {
-      // toast.warning('Email ou senha incorreto.');
+      Alert.alert('Erro', 'Email ou senha incorreto.');
       yield put(signFailure());
       return;
     }
 
-    // localStorage.setItem('@Omni:token', token);
-
+    yield call([AsyncStorage, 'setItem'], '@Omni:token', token);
     // api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token));
 
     // history.push('/');
   } catch (error) {
-    // toast.error('Erro ao efetuar login.');
+    Alert.alert('Erro', 'Erro ao efetuar login.');
     yield put(signFailure());
   }
 }
@@ -58,20 +59,18 @@ export function* signUp({ payload }) {
     const { token } = response.data;
 
     if (!token) {
-      // toast.error('Erro, revise os dados.');
+      Alert.alert('Erro', 'Revise os dados.');
     }
 
-    // localStorage.setItem('@Omni:token', token);
+    yield call([AsyncStorage, 'setItem'], '@Omni:token', token);
 
     yield put(signUpSuccess(response.data));
-
-    // toast.success('Cadastro realizado.');
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     // history.push('/');
   } catch (error) {
-    // toast.error('Erro ao cadastrar, tente novamente.');
+    Alert.alert('Erro', 'Erro ao cadastrar, tente novamente.');
   }
 }
 
@@ -91,9 +90,8 @@ export function* getPermissions() {
   yield put(getPermissionSuccess(role, permission));
 }
 
-export function signOut() {
-  // localStorage.removeItem('@Omni:token');
-  // localStorage.removeItem('@Omni:team');
+export function* signOut() {
+  yield call([AsyncStorage, 'clear']);
   // history.push('/signin');
 }
 

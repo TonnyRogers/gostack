@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { KeyboardAvoidingView, Platform, Alert } from 'react-native';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 
 import {
   Container,
@@ -11,12 +12,14 @@ import {
   SubmitButton,
   SubmitButtonText,
 } from './styles';
+import { signInRequest } from '../../store/modules/auth/actions';
 
 const SignIn = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const passwordRef = useRef();
+  const dispatch = useDispatch();
 
   navigation.setOptions({
     title: 'Login',
@@ -24,6 +27,7 @@ const SignIn = () => {
 
   function handleSubmit() {
     // ACTION()
+    dispatch(signInRequest(email, password));
   }
 
   return (
@@ -56,9 +60,7 @@ const SignIn = () => {
             onChangeText={setPassword}
           />
 
-          <SubmitButton
-            onPress={() => Alert.alert('message', `${email} e ${password}`)}
-          >
+          <SubmitButton onPress={handleSubmit}>
             <SubmitButtonText>Logar</SubmitButtonText>
           </SubmitButton>
         </Form>
