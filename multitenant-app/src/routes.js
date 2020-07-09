@@ -21,22 +21,3 @@ export default (isSigned = false) => (
     )}
   </Stack.Navigator>
 );
-
-// function Routes() {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator
-//         screenOptions={{
-//           headerTitleAlign: 'center',
-//           headerShown: false,
-//         }}
-//         initialRouteName="SignIn"
-//       >
-//         <Stack.Screen name="Main" component={Main} />
-//         <Stack.Screen name="SignIn" component={SignIn} />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// }
-
-// export default Routes;

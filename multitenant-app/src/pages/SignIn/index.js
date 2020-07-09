@@ -26,7 +26,6 @@ const SignIn = () => {
   });
 
   function handleSubmit() {
-    // ACTION()
     dispatch(signInRequest(email, password));
   }
 
