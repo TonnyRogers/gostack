@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -11,17 +11,27 @@ import {
   NewProjectButton,
 } from './styles';
 import { getProjectsRequest } from '../../store/modules/projects/actions';
+import NewProject from '../NewProject';
 
 const Projects = () => {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.projects);
   const activeTeam = useSelector((state) => state.teams.active);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (activeTeam) {
       dispatch(getProjectsRequest());
     }
-  }, [activeTeam]);
+  }, [activeTeam, projects]);
+
+  function toggleModalOpen() {
+    setIsModalOpen(true);
+  }
+
+  function toggleModalClose() {
+    setIsModalOpen(false);
+  }
 
   if (!activeTeam) return null;
 
@@ -37,9 +47,11 @@ const Projects = () => {
         )}
       />
 
-      <NewProjectButton onPress={() => {}}>
+      <NewProjectButton onPress={toggleModalOpen}>
         <Icon name="add" size={24} color="#FFF" />
       </NewProjectButton>
+
+      <NewProject visible={isModalOpen} onRequestClose={toggleModalClose} />
     </Container>
   );
 };

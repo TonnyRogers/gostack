@@ -40,14 +40,11 @@ const TeamSwitcher = () => {
           />
         </TeamButton>
       ))}
-      <NewTeamButton onPress={() => toggleModalOpen()}>
+      <NewTeamButton onPress={toggleModalOpen}>
         <Icon name="add" size={24} color="#999" />
       </NewTeamButton>
 
-      <NewTeam
-        visible={isModalOpen}
-        onRequestClose={() => toggleModalClose()}
-      />
+      <NewTeam visible={isModalOpen} onRequestClose={toggleModalClose} />
     </Container>
   );
 };
