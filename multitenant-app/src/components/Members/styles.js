@@ -46,3 +46,18 @@ export const InviteButtonText = styled.Text`
   font-weight: 700;
   font-size: 16px;
 `;
+
+export const SignOutButton = styled.TouchableOpacity`
+  background: #7159c1;
+  height: 40px;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  margin: 8px;
+`;
+
+export const SignOutButtonText = styled.Text`
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+`;

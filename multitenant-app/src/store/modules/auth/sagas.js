@@ -1,7 +1,7 @@
 /* eslint-disable require-yield */
 import { all, takeLatest, call, put, select, fork } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Alert } from 'react-native';
+import Toast from 'react-native-simple-toast';
 
 // import history from '~/services/history';
 import api from '../../../services/api';
@@ -21,7 +21,7 @@ export function* signIn({ payload }) {
     const { token } = response.data;
 
     if (!token) {
-      Alert.alert('Erro', 'Email ou senha incorreto.');
+      Toast.show('Email ou senha incorreto.', 2000);
       yield put(signFailure());
       return;
     }
@@ -30,10 +30,8 @@ export function* signIn({ payload }) {
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token));
-
-    // history.push('/');
   } catch (error) {
-    Alert.alert('Erro', 'Erro ao efetuar login.');
+    Toast.show('Erro ao efetuar login.', 2000);
     yield put(signFailure());
   }
 }
@@ -57,7 +55,7 @@ export function* signUp({ payload }) {
     const { token } = response.data;
 
     if (!token) {
-      Alert.alert('Erro', 'Revise os dados.');
+      Toast.show('Erro, revise os dados.', 2000);
     }
 
     yield call([AsyncStorage, 'setItem'], '@Omni:token', token);
@@ -65,10 +63,8 @@ export function* signUp({ payload }) {
     yield put(signUpSuccess(response.data));
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
-
-    // history.push('/');
   } catch (error) {
-    Alert.alert('Erro', 'Erro ao cadastrar, tente novamente.');
+    Toast.show('Erro ao cadastrar, tente novamente.', 2000);
   }
 }
 

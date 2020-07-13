@@ -1,7 +1,7 @@
 /* eslint-disable require-yield */
 import { all, takeLatest, put, call } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Alert } from 'react-native';
+import Toast from 'react-native-simple-toast';
 
 import {
   getTeamsSuccess,
@@ -20,6 +20,7 @@ export function* getTeams() {
 
     yield put(getTeamsSuccess(response.data));
   } catch (error) {
+    Toast.show('Erro ao buscar times', 2000);
     yield put(getTeamsFailure());
   }
 }
@@ -51,7 +52,7 @@ export function* selectTeam({ payload }) {
 
     yield put(selectTeamSuccess(team));
   } catch (error) {
-    Alert.alert('Erro', 'Falha ao selecionar time');
+    Toast.show('Falha ao selecionar time', 2000);
     yield put(selectTeamFailure());
   }
 }
@@ -63,13 +64,14 @@ export function* createTeam({ payload }) {
     const response = yield call(api.post, 'teams', { name });
 
     if (!response.data) {
-      Alert.alert('Erro', 'tente mais tarde.');
+      Toast.show('Erro tente mais tarde.', 2000);
+
       return;
     }
 
     yield put(createTeamSuccess(response.data));
   } catch (error) {
-    Alert.alert('Erro', 'Falha ao criar novo time, revise os dados.');
+    Toast.show('Falha ao criar novo time, revise os dados.', 2000);
     yield put(createTeamFailure());
   }
 }

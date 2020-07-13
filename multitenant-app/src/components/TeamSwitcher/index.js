@@ -35,7 +35,11 @@ const TeamSwitcher = () => {
         >
           <TeamAvatar
             source={{
-              uri: `https://ui-avatars.com/api/?fontsize=0.33&background=7159c1&color=FFF&name=${team.name}`,
+              uri: `https://ui-avatars.com/api/?fontsize=0.33&background=${
+                teams.active && teams.active.id === team.id
+                  ? '59c18b'
+                  : '7159c1'
+              }&color=FFF&name=${team.name}`,
             }}
           />
         </TeamButton>

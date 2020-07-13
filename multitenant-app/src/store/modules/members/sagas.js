@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { Alert } from 'react-native';
+import Toast from 'react-native-simple-toast';
 
 import api from '../../../services/api';
 import { getMembersSuccess, clearMembers, getMembersRequest } from './actions';
@@ -13,7 +13,7 @@ export function* getMembers() {
 
     yield put(getMembersSuccess(response.data));
   } catch (error) {
-    Alert.alert('Erro', 'Erro ao carregar membros.');
+    Toast.show('Erro ao carregar membros.', 2000);
   }
 }
 
@@ -25,9 +25,9 @@ export function* updateMember({ payload }) {
       roles: roles.map((role) => role.id),
     });
 
-    Alert.alert('Sucesso', 'Membro atualizado!');
+    Toast.show('Membro atualizado!', 2000);
   } catch (error) {
-    Alert.alert('Erro', 'Erro ao atualizar membro.');
+    Toast.show('Erro ao atualizar membro.', 2000);
   }
 }
 
@@ -37,11 +37,11 @@ export function* inviteMember({ payload }) {
 
     yield call(api.post, 'invites', { invites: [email] });
 
-    Alert.alert('Sucesso', 'Convite enviado!');
+    Toast.show('Convite enviado!', 2000);
 
     yield put(getMembersRequest());
   } catch (error) {
-    Alert.alert('Erro', 'Erro ao enviar convite.');
+    Toast.show('Erro ao enviar convite', 2000);
   }
 }
 
