@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useDispatch, useSelector } from 'react-redux';
 
+import NewTeam from '../NewTeam';
 import {
   getTeamsRequest,
   selectTeamResquest,
@@ -11,10 +12,19 @@ import { Container, TeamButton, TeamAvatar, NewTeamButton } from './styles';
 const TeamSwitcher = () => {
   const dispatch = useDispatch();
   const teams = useSelector((state) => state.teams);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getTeamsRequest());
-  }, []);
+  }, [teams]);
+
+  function toggleModalOpen() {
+    setIsModalOpen(true);
+  }
+
+  function toggleModalClose() {
+    setIsModalOpen(false);
+  }
 
   return (
     <Container>
@@ -30,9 +40,14 @@ const TeamSwitcher = () => {
           />
         </TeamButton>
       ))}
-      <NewTeamButton onPress={() => {}}>
+      <NewTeamButton onPress={() => toggleModalOpen()}>
         <Icon name="add" size={24} color="#999" />
       </NewTeamButton>
+
+      <NewTeam
+        visible={isModalOpen}
+        onRequestClose={() => toggleModalClose()}
+      />
     </Container>
   );
 };

@@ -8,7 +8,7 @@ export function* getProjects() {
   try {
     const response = yield call(api.get, 'projects');
 
-    console.tron.log(response);
+    console.tron.log(response.data);
 
     yield put(getProjectsSuccess(response.data));
   } catch (error) {

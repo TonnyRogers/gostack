@@ -91,10 +91,10 @@ export function* signOut() {
 }
 
 export default all([
-  fork(getPermissions),
+  // fork(getPermissions),
   takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
-  takeLatest('@teams/SELECT_TEAM_REQUEST', getPermissions),
+  takeLatest('@teams/SELECT_TEAM_SUCCESS', getPermissions),
   takeLatest('@auth/SIGN_OUT', signOut),
 ]);

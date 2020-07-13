@@ -27,10 +27,14 @@ export function* getTeams() {
 export function* setTeam({ payload }) {
   if (!payload) return;
 
-  const { active: team } = payload.teams;
+  // const { active: team } = payload.teams;
 
   // yield call([AsyncStorage, 'setItem'], '@Omni:team', team);
   // yield call([AsyncStorage, 'setItem'], '@Omni:team', JSON.stringify(team));
+
+  const team = JSON.parse(yield call([AsyncStorage, 'getItem'], '@Omni:team'));
+
+  console.tron.log('SETTEAM', team);
 
   if (team) {
     api.defaults.headers.TEAM = team.slug;
@@ -41,11 +45,11 @@ export function* selectTeam({ payload }) {
   try {
     const { team } = payload;
 
-    yield put(selectTeamSuccess(team));
-
     yield call([AsyncStorage, 'setItem'], '@Omni:team', JSON.stringify(team));
 
     api.defaults.headers.TEAM = team.slug;
+
+    yield put(selectTeamSuccess(team));
   } catch (error) {
     Alert.alert('Erro', 'Falha ao selecionar time');
     yield put(selectTeamFailure());
