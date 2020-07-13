@@ -18,8 +18,6 @@ export function* signIn({ payload }) {
 
     const response = yield call(api.post, 'sessions', { email, password });
 
-    console.tron.log(response);
-
     const { token } = response.data;
 
     if (!token) {
@@ -29,7 +27,7 @@ export function* signIn({ payload }) {
     }
 
     yield call([AsyncStorage, 'setItem'], '@Omni:token', token);
-    // api.defaults.headers.Authorization = `Bearer ${token}`;
+    api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token));
 
@@ -46,7 +44,7 @@ export function* setToken({ payload }) {
   const { token } = payload.auth;
 
   if (token) {
-    // api.defaults.headers.Authorization = `Bearer ${token}`;
+    api.defaults.headers.Authorization = `Bearer ${token}`;
   }
 }
 
@@ -78,9 +76,6 @@ export function* getPermissions() {
   const team = yield select((state) => state.teams.active);
   const signedIn = yield select((state) => state.auth.signed);
 
-  console.tron.log('Team', team);
-  console.tron.log('Signed', signedIn);
-
   if (!signedIn || !team) return;
 
   const response = yield call(api.get, 'permissions');
@@ -97,7 +92,7 @@ export function* signOut() {
 
 export default all([
   fork(getPermissions),
-  // takeLatest('persist/REHYDRATE', setToken),
+  takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
   takeLatest('@teams/SELECT_TEAM_REQUEST', getPermissions),

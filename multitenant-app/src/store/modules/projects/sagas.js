@@ -1,4 +1,5 @@
 import { call, takeLatest, put, all } from 'redux-saga/effects';
+import { Alert } from 'react-native';
 
 import api from '../../../services/api';
 import { getProjectsSuccess, createProjectSuccess } from './actions';
@@ -11,7 +12,7 @@ export function* getProjects() {
 
     yield put(getProjectsSuccess(response.data));
   } catch (error) {
-    // toast.error('Falha ao carregar projetos.');
+    Alert.alert('Erro', 'Falha ao carregar projetos.');
   }
 }
 
@@ -22,14 +23,13 @@ export function* createProject({ payload }) {
     const response = yield call(api.post, 'projects', { title });
 
     if (!response.data) {
-      // toast.error('Erro ao criar projeto...');
+      Alert.alert('Erro', 'Erro ao criar projeto...');
       return;
     }
 
     yield put(createProjectSuccess(response.data));
-    // toast.success(`Projeto "${title}" criado`);
   } catch (error) {
-    // toast.error('Erro ao criar projeto...');
+    Alert.alert('Erro', 'Erro ao criar projeto...');
   }
 }
 
