@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   background: #1d2127;
   flex: 1;
   padding: 10px;
@@ -25,7 +25,7 @@ export const NewTeamButton = styled.TouchableOpacity`
   border-radius: 25px;
   border: 1px dashed rgba(255, 255, 255, 0.3);
   color: rgba(255, 255, 255, 0.3);
-  margin: 0 0 8px;
+  margin: 0 0 20px;
   background: transparent;
   font-weight: bold;
   align-items: center;

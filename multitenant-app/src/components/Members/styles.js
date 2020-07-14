@@ -48,12 +48,13 @@ export const InviteButtonText = styled.Text`
 `;
 
 export const SignOutButton = styled.TouchableOpacity`
-  background: #7159c1;
+  background: transparent;
   height: 40px;
   border-radius: 4px;
   align-items: center;
   justify-content: center;
   margin: 8px;
+  flex-direction: row;
 `;
 
 export const SignOutButtonText = styled.Text`

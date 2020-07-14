@@ -24,7 +24,7 @@ const Projects = () => {
     if (activeTeam) {
       dispatch(getProjectsRequest());
     }
-  }, [activeTeam, projects]);
+  }, [activeTeam]);
 
   function toggleModalOpen() {
     setIsModalOpen(true);

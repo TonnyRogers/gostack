@@ -24,13 +24,16 @@ import {
 const Members = () => {
   const dispatch = useDispatch();
   const members = useSelector((state) => state.members);
+  const activeTeam = useSelector((state) => state.teams.active);
   const [isInviteModalOpen, setInviteModalOpen] = useState(false);
   const [isRoleModalOpen, setRoleModalOpen] = useState(false);
   const [memberEdit, setMemberEdit] = useState(null);
 
   useEffect(() => {
-    dispatch(getMembersRequest());
-  }, [dispatch]);
+    if (activeTeam) {
+      dispatch(getMembersRequest());
+    }
+  }, [activeTeam]);
 
   function toggleInviteModalOpen() {
     setInviteModalOpen(true);
@@ -52,7 +55,7 @@ const Members = () => {
 
   return (
     <Container>
-      <Title>Membros</Title>
+      <Title>MEMBROS</Title>
 
       <MemberList
         data={members.data}

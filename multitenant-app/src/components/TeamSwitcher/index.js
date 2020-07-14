@@ -16,7 +16,7 @@ const TeamSwitcher = () => {
 
   useEffect(() => {
     dispatch(getTeamsRequest());
-  }, [teams]);
+  }, []);
 
   function toggleModalOpen() {
     setIsModalOpen(true);

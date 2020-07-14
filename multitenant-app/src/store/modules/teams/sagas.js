@@ -26,7 +26,7 @@ export function* getTeams() {
 }
 
 export function* setTeam({ payload }) {
-  if (!payload) return;
+  // if (!payload) return;
 
   // const { active: team } = payload.teams;
 
@@ -35,11 +35,13 @@ export function* setTeam({ payload }) {
 
   const team = JSON.parse(yield call([AsyncStorage, 'getItem'], '@Omni:team'));
 
+  if (!team) return;
+
   console.tron.log('SETTEAM', team);
 
-  if (team) {
-    api.defaults.headers.TEAM = team.slug;
-  }
+  yield (api.defaults.headers.TEAM = team.slug);
+
+  console.tron.log('Chegou Aqui', api.defaults.headers);
 }
 
 export function* selectTeam({ payload }) {
@@ -81,7 +83,7 @@ export function* clearTeams() {
 }
 
 export default all([
-  takeLatest('persist/REHYDRATE', setTeam),
+  // takeLatest('persist/REHYDRATE', setTeam),
   takeLatest('@teams/GET_TEAM_REQUEST', getTeams),
   takeLatest('@teams/SELECT_TEAM_REQUEST', selectTeam),
   takeLatest('@teams/CREATE_TEAM_REQUEST', createTeam),

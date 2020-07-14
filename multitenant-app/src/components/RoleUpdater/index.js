@@ -31,6 +31,10 @@ const RoleUpdater = ({ visible, onRequestClose, member }) => {
   }, []);
 
   function handleRoleChange(value, role) {
+    if (role.slug === 'admin') {
+      value = true;
+    }
+
     const requestRoles = value
       ? [...member.roles, role]
       : member.roles.filter((memberRole) => memberRole.id !== role.id);
