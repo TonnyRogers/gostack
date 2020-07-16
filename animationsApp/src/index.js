@@ -1,8 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {View, SafeAreaView, Animated, StyleSheet} from 'react-native';
 
+const ballY = new Animated.Value(0);
+const ballX = new Animated.divide(ballY, 2);
+
 const App = () => {
-  const [ball1Y, setBall1Y] = useState(new Animated.Value(0));
+  const [ball1Y, setBall1Y] = useState(ballY);
+  const [ball1X, setBall1X] = useState(ballX);
   const [ball2Y, setBall2Y] = useState(new Animated.Value(0));
   const [ball3Y, setBall3Y] = useState(new Animated.Value(0));
 
@@ -15,25 +19,25 @@ const App = () => {
     }).start();
 
     // Spring (elastic)
-    Animated.spring(ball2Y, {
-      toValue: 200,
-      bounciness: 20,
-      useNativeDriver: false,
-    }).start();
+    // Animated.spring(ball2Y, {
+    //   toValue: 200,
+    //   bounciness: 20,
+    //   useNativeDriver: false,
+    // }).start();
 
     // Decay
-    Animated.decay(ball3Y, {
-      velocity: 0.4,
-      useNativeDriver: false,
-    }).start();
+    // Animated.decay(ball3Y, {
+    //   velocity: 0.4,
+    //   useNativeDriver: false,
+    // }).start();
   }, [ball1Y, ball2Y, ball3Y]);
 
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <Animated.View style={[styles.ball, {top: ball1Y}]} />
-        <Animated.View style={[styles.ball, {top: ball2Y}]} />
-        <Animated.View style={[styles.ball, {top: ball3Y}]} />
+        <Animated.View style={[styles.ball, {top: ball1Y, left: ball1X}]} />
+        {/* <Animated.View style={[styles.ball, {top: ball2Y}]} /> */}
+        {/* <Animated.View style={[styles.ball, {top: ball3Y}]} /> */}
       </View>
     </SafeAreaView>
   );
