@@ -7,6 +7,8 @@ import AnimationTypes from './pages/AnimationTypes';
 import Parallel from './pages/Parallel';
 import Sequential from './pages/Sequential';
 import Stagger from './pages/Stagger';
+import Loop from './pages/Loop';
+import Interpolate from './pages/Interpolate';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +25,8 @@ function Routes() {
         <Stack.Screen name="Parallel" component={Parallel} />
         <Stack.Screen name="Sequential" component={Sequential} />
         <Stack.Screen name="Stagger" component={Stagger} />
+        <Stack.Screen name="Loop" component={Loop} />
+        <Stack.Screen name="Interpolate" component={Interpolate} />
       </Stack.Navigator>
     </NavigationContainer>
   );

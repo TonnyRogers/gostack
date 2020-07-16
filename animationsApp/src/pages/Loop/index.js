@@ -1,36 +1,42 @@
 import React, {useEffect, useState} from 'react';
 import {View, SafeAreaView, Animated, StyleSheet} from 'react-native';
 
-const Sequential = () => {
+const Loop = () => {
   const [ball1Y, setBall1Y] = useState(new Animated.Value(0));
   const [ball1X, setBall1X] = useState(new Animated.Value(0));
 
   useEffect(() => {
-    Animated.sequence([
-      Animated.timing(ball1Y, {
-        toValue: 200,
-        duration: 500,
-        useNativeDriver: false,
-      }),
-      Animated.delay(100),
-      Animated.timing(ball1X, {
-        toValue: 200,
-        duration: 500,
-        useNativeDriver: false,
-      }),
-      Animated.delay(100),
-      Animated.timing(ball1Y, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: false,
-      }),
-      Animated.delay(100),
-      Animated.timing(ball1X, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: false,
-      }),
-    ]).start();
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(ball1Y, {
+          toValue: 200,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+        Animated.delay(100),
+        Animated.timing(ball1X, {
+          toValue: 200,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+        Animated.delay(100),
+        Animated.timing(ball1Y, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+        Animated.delay(100),
+        Animated.timing(ball1X, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+        Animated.delay(100),
+      ]),
+      {
+        iterations: 3,
+      },
+    ).start();
   }, [ball1Y, ball1X]);
 
   return (
@@ -64,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Sequential;
+export default Loop;
