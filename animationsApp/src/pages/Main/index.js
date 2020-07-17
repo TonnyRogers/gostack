@@ -36,6 +36,16 @@ const Main = () => {
         <NavigationButton onPress={() => navigation.navigate('Interpolate')}>
           <NavigationButtonText>Interpolate Animation</NavigationButtonText>
         </NavigationButton>
+
+        <NavigationButton onPress={() => navigation.navigate('PanResponder')}>
+          <NavigationButtonText>PanResponder</NavigationButtonText>
+        </NavigationButton>
+
+        <NavigationButton
+          onPress={() => navigation.navigate('Example1')}
+          style={{backgroundColor: '#129252'}}>
+          <NavigationButtonText>Example 1</NavigationButtonText>
+        </NavigationButton>
       </NavigationContent>
     </Container>
   );
