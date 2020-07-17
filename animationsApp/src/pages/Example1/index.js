@@ -136,6 +136,7 @@ const Example1 = () => {
                   }),
                 },
               ],
+              flex: 1,
             },
           ]}>
           <UserList

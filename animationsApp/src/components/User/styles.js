@@ -14,7 +14,7 @@ export const Background = styled.ImageBackground`
   border-radius: 4px;
 `;
 
-export const UserData = styled.View`
+export const UserData = styled.TouchableOpacity`
   background: #999;
   padding: 8px;
   flex-direction: row;

@@ -22,7 +22,6 @@ export const Title = styled(Animated.Text)`
   margin-bottom: 8px;
   margin-left: 8px;
 `;
-
 export const UserList = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
 })`

@@ -22,7 +22,11 @@ function Routes() {
           headerTitleAlign: 'center',
         }}
         initialRouteName="Main">
-        <Stack.Screen name="Main" component={Main} />
+        <Stack.Screen
+          name="Main"
+          component={Main}
+          options={{headerShown: false}}
+        />
         <Stack.Screen name="AnimationTypes" component={AnimationTypes} />
         <Stack.Screen name="Parallel" component={Parallel} />
         <Stack.Screen name="Sequential" component={Sequential} />

@@ -11,6 +11,7 @@ import {
 
 const Main = () => {
   const navigation = useNavigation();
+
   const pageButtons = [
     {
       name: 'Animation Types',
@@ -48,7 +49,7 @@ const Main = () => {
       background: null,
     },
     {
-      name: 'Example1',
+      name: 'Example',
       sendNavigate: () => navigation.navigate('Example1'),
       background: '#4bbf8b',
     },
