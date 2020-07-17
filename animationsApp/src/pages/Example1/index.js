@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Animated} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -6,12 +6,45 @@ import {Container, PageHeader, UserList, Title} from './styles';
 import User from '../../components/User';
 
 const Example1 = () => {
+  const scrollOffset = useRef(new Animated.Value(0)).current;
+
   return (
     <Container>
-      <PageHeader>
-        <Title>GoNative</Title>
+      <PageHeader
+        style={[
+          {
+            height: scrollOffset.interpolate({
+              inputRange: [0, 140],
+              outputRange: [200, 70],
+              extrapolate: 'clamp',
+            }),
+          },
+        ]}>
+        <Title
+          style={[
+            {
+              fontSize: scrollOffset.interpolate({
+                inputRange: [120, 140],
+                outputRange: [24, 16],
+                extrapolate: 'clamp',
+              }),
+            },
+          ]}>
+          GoNative
+        </Title>
       </PageHeader>
-      <UserList>
+      <UserList
+        scrollEventThrottle={16}
+        onScroll={Animated.event(
+          [
+            {
+              nativeEvent: {
+                contentOffset: {y: scrollOffset},
+              },
+            },
+          ],
+          {useNativeDriver: false},
+        )}>
         <User
           name="Tony Amaral"
           role="Head Developer"

@@ -52,11 +52,6 @@ const Main = () => {
       sendNavigate: () => navigation.navigate('Example1'),
       background: '#4bbf8b',
     },
-    {
-      name: 'Example1',
-      sendNavigate: () => navigation.navigate('Example1'),
-      background: '#4bbf8b',
-    },
   ];
 
   const columns = 2;
