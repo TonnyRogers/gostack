@@ -4,25 +4,30 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-export const NavigationContent = styled.ScrollView`
-  margin: 10px;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.1);
+export const Navigation = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})`
   flex: 1;
-  border-radius: 4px;
+  margin: 10px;
 `;
 
 export const NavigationButton = styled.TouchableOpacity`
-  height: 60px;
+  height: 120px;
+  width: 120px;
   border-radius: 4px;
-  background: #7159c1;
+  background: ${(props) =>
+    props.empty ? 'transparent' : props.bgColor || '#7159c1'};
   align-items: center;
   justify-content: center;
-  margin: 8px 0;
+  flex-grow: 1;
+  margin: 4px;
+  padding: 10px;
+  flex-basis: 0;
 `;
 
 export const NavigationButtonText = styled.Text`
-  color: #fff;
+  color: ${(props) => (props.empty ? 'transparent' : '#FFF')};
   font-weight: bold;
   font-size: 18px;
+  text-align: center;
 `;
