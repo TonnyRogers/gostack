@@ -16,7 +16,7 @@ import {
   Likes,
 } from './styles';
 
-const User = ({name, role, likes, url}) => {
+const User = ({name, role, likes, url, press}) => {
   const offset = useRef(new Animated.ValueXY({x: 0, y: 150})).current;
   const opacity = useRef(new Animated.Value(0)).current;
 
@@ -55,7 +55,7 @@ const User = ({name, role, likes, url}) => {
               <Role>{role}</Role>
             </UserInfo>
             <LikeContent>
-              <LikeButton>
+              <LikeButton onPress={press}>
                 <Icon name="favorite" size={15} color="#FFF" />
                 <Likes>{likes}</Likes>
               </LikeButton>
@@ -72,6 +72,11 @@ User.propTypes = {
   role: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired,
+  press: PropTypes.func,
+};
+
+User.defaultProps = {
+  press: null,
 };
 
 export default User;

@@ -8,6 +8,12 @@ export const Container = styled.View`
 export const PageHeader = styled(Animated.View)`
   background: #458;
   justify-content: flex-end;
+  margin-bottom: 10px;
+`;
+
+export const HeaderBackground = styled.ImageBackground`
+  flex: 1;
+  justify-content: flex-end;
 `;
 
 export const Title = styled(Animated.Text)`
