@@ -1,0 +1,50 @@
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: items line breaker */
+  /* align-content: linebreak item align */
+  align-items: flex-start; /* row: vertical aligment | column: horizontal aligment */
+  justify-content: flex-start; /* row: horizontal aligment | column: vertical aligment */
+}
+
+.box {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  background: #7159c1;
+  margin: 5px;
+  transition: all 0.2s;
+  flex: 1; /* flex-grow + flex-shrink */
+}
+
+.box h4 {
+  color: #FFF;
+  font-weight: bold;
+  align-self: center;
+  text-align: center;
+}
+
+.rocket {
+  order: 0; /* item ordenation */ 
+}
+
+.red {
+  order: 1;
+  background: #c15959;
+}
+
+.green {
+  order: 2;
+  background: #59c18d;
+}
+
+.box:hover {
+  filter: brightness(0.8);
+}
