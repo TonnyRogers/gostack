@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 
-
+import withAnalytics from '../src/hocs/withAnalytics';
 
 const Home = () => {
   return (
@@ -18,4 +18,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default withAnalytics()(Home);
